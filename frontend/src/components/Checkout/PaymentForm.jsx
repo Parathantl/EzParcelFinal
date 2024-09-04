@@ -4,7 +4,8 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 import axios from 'axios';
 import { server } from '../../server';
 
-const stripePromise = loadStripe('pk_test_51PrHd9Rxa5Loq6IR3SIztZIJZkB84kb9VqkvxMleq3b8CX2UovH3ZWVf5Gjp3RJ8vfE0zr76grZof1lJDiJdByZr008kQcQo5c');
+// ToDo: Change here with pk_test
+const stripePromise = loadStripe('');
 
 const PaymentForm = ({ orderId, amount, onSuccess }) => {
   const stripe = useStripe();
