@@ -6,7 +6,8 @@ const Payment = require("../model/payment");
 const Order = require("../model/order");
 
 // sk_test ......
-const stripe = require("stripe")("sk_test_51PrHd9Rxa5Loq6IRHlY17Wt8b5HUfssOiRWU2w79eGHFx6I7iiu5HvPqNYnna6cawXiwQGWQLZ3ZhI7F4mE9Rb5z00LWY9Ikco");
+// ToDo: change here with sk_test
+const stripe = require("stripe")("");
 
 router.post('/create-payment-intent', async (req, res) => {
   try {
