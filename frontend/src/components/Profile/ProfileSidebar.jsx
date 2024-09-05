@@ -1,11 +1,9 @@
 import React from "react";
 import { AiOutlineLogin, AiOutlineMessage } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { HiOutlineReceiptRefund, HiOutlineShoppingBag } from "react-icons/hi";
+import { HiOutlineShoppingBag } from "react-icons/hi";
 import {
   MdOutlineAdminPanelSettings,
-  MdOutlinePassword,
-  MdOutlineTrackChanges,
 } from "react-icons/md";
 import { TbAddressBook } from "react-icons/tb";
 import { RxPerson } from "react-icons/rx";
@@ -111,6 +109,34 @@ const ProfileSidebar = ({ setActive, active }) => {
           } 800px:block hidden`}
         >
           Address
+        </span>
+      </div>
+
+      <div
+        className="flex items-center cursor-pointer w-full mb-8"
+        onClick={() => setActive(9)}
+      >
+        <TbAddressBook size={20} color={active === 9 ? "red" : ""} />
+        <span
+          className={`pl-3 ${
+            active === 7 ? "text-[red]" : ""
+          } 800px:block hidden`}
+        >
+          Add Tour Plan
+        </span>
+      </div>
+
+      <div
+        className="flex items-center cursor-pointer w-full mb-8"
+        onClick={() => setActive(10)}
+      >
+        <TbAddressBook size={20} color={active === 10 ? "red" : ""} />
+        <span
+          className={`pl-3 ${
+            active === 10 ? "text-[red]" : ""
+          } 800px:block hidden`}
+        >
+          Tour Plans
         </span>
       </div>
 

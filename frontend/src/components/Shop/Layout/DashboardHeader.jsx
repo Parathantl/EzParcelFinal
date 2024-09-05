@@ -1,10 +1,9 @@
 import React from "react";
-import { AiOutlineGift } from "react-icons/ai";
-import { MdOutlineLocalOffer } from "react-icons/md";
-import { FiPackage, FiShoppingBag } from "react-icons/fi";
+import { FiPackage } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BiMessageSquareDetail } from "react-icons/bi";
+import Logo from "../../../Assests/Logo.jpeg";
 
 const DashboardHeader = () => {
   const { seller } = useSelector((state) => state.seller);
@@ -13,8 +12,9 @@ const DashboardHeader = () => {
       <div>
         <Link to="/dashboard">
           <img
-            src="https://shopo.quomodothemes.website/assets/images/logo.svg"
+            src={Logo}
             alt=""
+            className="h-[100px] w-auto object-contain"
           />
         </Link>
       </div>

@@ -34,7 +34,7 @@ const Header = ({ activeHeading }) => {
     const filteredProducts =
       allProducts &&
       allProducts.filter((product) =>
-        product.name.toLowerCase().includes(term.toLowerCase())
+        product.product.name.toLowerCase().includes(term.toLowerCase())
       );
     setSearchData(filteredProducts);
   };
@@ -83,20 +83,21 @@ const Header = ({ activeHeading }) => {
             size={30}
             className="absolute right-2 top-1.5 cursor-pointer text-gray-500"
           />
-          {searchData && searchData.length !== 0 && (
-            <div className="absolute w-full bg-white shadow-md z-10 mt-1 rounded-md max-h-[300px] overflow-y-auto">
-              {searchData.map((i) => (
-                <Link to={`/product/${i._id}`} key={i._id} className="flex items-center p-2 hover:bg-gray-100">
-                  <img
-                    src={i.images[0]?.url}
-                    alt={i.name}
-                    className="w-[40px] h-[40px] mr-2"
-                  />
-                  <h1 className="text-sm">{i.name}</h1>
-                </Link>
-              ))}
-            </div>
-          )}
+{searchData && searchData.length !== 0 && searchTerm && (
+  <div className="absolute w-full bg-white shadow-md z-10 mt-1 rounded-md max-h-[300px] overflow-y-auto">
+    {searchData.map((i) => (
+      <Link to={`/product/${i._id}`} key={i._id} className="flex items-center p-2 hover:bg-gray-100">
+        <img
+          src={i.product.images[0]?.url}
+          alt={i.product.name}
+          className="w-[40px] h-[40px] mr-2"
+        />
+        <h1 className="text-sm">{i.product.name}</h1>
+      </Link>
+    ))}
+  </div>
+)}
+
         </div>
 
         {/* Become Seller or Dashboard */}
@@ -119,9 +120,11 @@ const Header = ({ activeHeading }) => {
         } transition hidden lg:flex items-center justify-between w-full bg-[#101013] h-[70px]`}
       >
         <div className={`${styles.section} relative flex items-center justify-between`}>
+        
+        <div className="flex items-center space-x-4">
           {/* Categories Dropdown */}
           <div onClick={() => setDropDown(!dropDown)} className="relative">
-            <div className="h-[60px] mt-[10px] w-[200px] hidden xl:block cursor-pointer">
+            <div className="h-[60px] mt-[10px] w-[200px] xl:block cursor-pointer">
               <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
               <button className="h-full w-full flex justify-between items-center pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md">
                 All Categories
@@ -141,7 +144,7 @@ const Header = ({ activeHeading }) => {
 
           {/* Country Dropdown */}
           <div onClick={() => setCountryDropDown(!countryDropDown)} className="relative">
-            <div className="h-[60px] mt-[10px] w-[200px] hidden xl:block cursor-pointer">
+            <div className="h-[60px] mt-[10px] w-[200px] xl:block cursor-pointer">
               <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
               <button className="h-full w-full flex justify-between items-center pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md">
                 Countries
@@ -158,6 +161,8 @@ const Header = ({ activeHeading }) => {
               )}
             </div>
           </div>
+        </div>
+
 
           {/* Navbar */}
           <Navbar active={activeHeading} />

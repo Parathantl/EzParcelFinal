@@ -19,6 +19,7 @@ const CreateProduct = () => {
   const [images, setImages] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [deliveryFee, setDeliveryFee] = useState();
+  const [packageSize, setPackageSize] = useState();
   const [deliveryDate, setDeliveryDate] = useState("");
   const [country, setCountry] = useState("");
 
@@ -31,7 +32,7 @@ const CreateProduct = () => {
       navigate("/dashboard"); // Adjust navigation as needed
       window.location.reload();
     }
-  }, [dispatch, error, success]);
+  }, [dispatch, error, navigate, success]);
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -62,6 +63,7 @@ const CreateProduct = () => {
     newForm.append("product.category", productCategory);
     newForm.append("quantity", quantity);
     newForm.append("deliveryFee", deliveryFee);
+    newForm.append("packageSize", packageSize);
     newForm.append("deliveryDate", deliveryDate);
     newForm.append("seller", seller._id);
     newForm.append("country", country);
@@ -78,7 +80,8 @@ const CreateProduct = () => {
         deliveryFee,
         deliveryDate,
         seller: seller._id,
-        country
+        country,
+        packageSize
       })
     );
   };
@@ -149,6 +152,22 @@ const CreateProduct = () => {
             className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             onChange={(e) => setQuantity(e.target.value)}
             placeholder="Enter the quantity..."
+          />
+        </div>
+        <br />
+        <div>
+          <label className="pb-2">
+            Package Size (in kg)<span className="text-red-500">*</span>
+          </label>
+          <input
+            type="number"
+            name="packageSize"
+            value={packageSize}
+            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            onChange={(e) => {
+              console.log(e.target.value)
+              setPackageSize(e.target.value)}}
+            placeholder="Enter the package size..."
           />
         </div>
         <br />

@@ -1,10 +1,9 @@
 import React from 'react'
-import { AiOutlineGift } from 'react-icons/ai'
 import { BiMessageSquareDetail } from 'react-icons/bi'
-import { FiPackage, FiShoppingBag } from 'react-icons/fi'
-import { MdOutlineLocalOffer } from 'react-icons/md'
+import { FiShoppingBag } from 'react-icons/fi'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Logo from '../../Assests/Logo.jpeg'
 
 const AdminHeader = () => {
     const {user} = useSelector((state) => state.user);
@@ -14,8 +13,9 @@ const AdminHeader = () => {
       <div>
         <Link to="/">
           <img
-            src="https://shopo.quomodothemes.website/assets/images/logo.svg"
+            src={Logo}
             alt=""
+            className="h-[100px] w-auto object-contain"
           />
         </Link>
       </div>

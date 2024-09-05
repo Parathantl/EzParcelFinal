@@ -23,6 +23,8 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { getAllOrdersOfUser } from "../../redux/actions/order";
+import TourPlanForm from "./TourPlanForm";
+import TourPlanList from "./TourPlanList";
 
 const ProfileContent = ({ active }) => {
   const { user, error, successMessage } = useSelector((state) => state.user);
@@ -196,6 +198,19 @@ const ProfileContent = ({ active }) => {
           <Address />
         </div>
       )}
+
+      {active === 9 && (
+        <div>
+          <TourPlanForm />
+        </div>
+      )}
+
+      {active === 10 && (
+        <div>
+          <TourPlanList />
+        </div>
+      )}
+
     </div>
   );
 };
@@ -777,4 +792,5 @@ const Address = () => {
     </div>
   );
 };
+
 export default ProfileContent;

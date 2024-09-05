@@ -17,7 +17,7 @@ const ProductsPage = () => {
   useEffect(() => {
     if (categoryData){
       const d =
-      allProducts && allProducts.filter((i) => i.category === categoryData);
+      allProducts && allProducts.filter((i) => i.product.category === categoryData);
       setData(d);
     } else if (countryData){
       console.log(allProducts, countryData);

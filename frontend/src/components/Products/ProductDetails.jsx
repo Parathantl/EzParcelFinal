@@ -130,8 +130,13 @@ const ProductDetails = ({ data }) => {
                   </h4>
                 </div>
 
+                <div className="flex pt-3">
+                  <h4 className={`${styles.productDiscountPrice}`}>
+                    Package Size (in kg): {data.packageSize}kg
+                  </h4>
+                </div>
 
-                  { data.orderStatus !== "accepted" ? 
+                 { isAuthenticated && data.orderStatus !== "accepted" &&
                                   <div
                                   className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
                                   onClick={handleClaimOrder}
@@ -140,10 +145,7 @@ const ProductDetails = ({ data }) => {
                     Claim the order
                    
                   </span>  </div> 
-                  : <span className="text-white flex items-center">
-                    Order claimed
-                  </span> }
-
+                 }
                 
                 <div className="flex items-center pt-8">
                   <Link to={`/shop/preview/${data?.seller._id}`}>
@@ -161,6 +163,8 @@ const ProductDetails = ({ data }) => {
                     </Link>
     
                   </div>
+
+                  { isAuthenticated &&
                   <div
                     className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`}
                     onClick={handleMessageSubmit}
@@ -168,7 +172,7 @@ const ProductDetails = ({ data }) => {
                     <span className="text-white flex items-center">
                       Send Message <AiOutlineMessage className="ml-1" />
                     </span>
-                  </div>
+                  </div> }
                 </div>
               </div>
             </div>

@@ -41,6 +41,10 @@ const orderSchema = new mongoose.Schema({
     required: [true, "Please enter the quantity!"],
     default: 1,
   },
+  packageSize: {
+    type: Number,
+    required: [true, "Please enter the package size!"],
+  },
   deliveryFee: {
     type: Number,
     required: [true, "Please enter the delivery fee!"],

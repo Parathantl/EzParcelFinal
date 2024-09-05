@@ -13,7 +13,7 @@ router.post(
   "/create-product",
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const { seller, traveler, product, quantity, deliveryFee, deliveryDate, country } = req.body;
+      const { seller, traveler, product, quantity, deliveryFee, deliveryDate, country, packageSize } = req.body;
   
       // Check if the seller exists
       const existingSeller = await Shop.findById(seller);
@@ -46,7 +46,8 @@ router.post(
         quantity,
         deliveryFee,
         deliveryDate,
-        orderCountry: country
+        orderCountry: country,
+        packageSize,
       };
   
       // Create a new order in the database
