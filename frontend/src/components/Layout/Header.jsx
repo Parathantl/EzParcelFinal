@@ -48,7 +48,11 @@ const Header = ({ activeHeading }) => {
   });
 
   const countries = useMemo(() => {
-    const countries = Country.getAllCountries().map((country) => country.name);
+    const countries = Country.getAllCountries().map((country) => {
+      return {
+        name: country.name, 
+        code: country.isoCode}
+      });
     return countries;
   }, []);
 

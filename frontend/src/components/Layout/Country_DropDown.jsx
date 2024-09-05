@@ -6,7 +6,7 @@ const CountryDropDown = ({ categoriesData, setDropDown }) => {
   const navigate = useNavigate();
 
   const submitHandle = (i) => {
-    navigate(`/products?country=${i}`);
+    navigate(`/products?country=${i.code}`);
     setDropDown(false);
     window.location.reload();
   };
@@ -22,7 +22,7 @@ const CountryDropDown = ({ categoriesData, setDropDown }) => {
               className={`${styles.noramlFlex}`}
               onClick={() => submitHandle(i)}
             >
-              <h3 className="m-3 cursor-pointer select-none">{i}</h3>
+              <h3 className="m-3 cursor-pointer select-none">{i.name}</h3>
             </div>
           ))}
       </div>

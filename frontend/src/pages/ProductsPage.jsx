@@ -10,20 +10,25 @@ import styles from "../styles/styles";
 const ProductsPage = () => {
   const [searchParams] = useSearchParams();
   const categoryData = searchParams.get("category");
+  const countryData = searchParams.get("country");
   const {allProducts,isLoading} = useSelector((state) => state.products);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    if (categoryData === null) {
-      const d = allProducts;
-      setData(d);
-    } else {
+    if (categoryData){
       const d =
       allProducts && allProducts.filter((i) => i.category === categoryData);
       setData(d);
+    } else if (countryData){
+      console.log(allProducts, countryData);
+      const d =
+      allProducts && allProducts.filter((i) => i.orderCountry === countryData);
+      setData(d);
+    } else {
+      setData(allProducts);
     }
     //    window.scrollTo(0,0);
-  }, [allProducts]);
+  }, [allProducts, categoryData, countryData]);
 
   return (
   <>
