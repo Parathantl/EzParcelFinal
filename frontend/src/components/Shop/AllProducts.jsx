@@ -88,21 +88,21 @@ const ListOrders = () => {
         );
       },
     },
-    {
-      field: "Delete",
-      flex: 0.8,
-      minWidth: 120,
-      headerName: "",
-      type: "number",
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <Button onClick={() => handleDelete(params.id)}>
-            <AiOutlineDelete size={20} />
-          </Button>
-        );
-      },
-    },
+    // {
+    //   field: "Delete",
+    //   flex: 0.8,
+    //   minWidth: 120,
+    //   headerName: "",
+    //   type: "number",
+    //   sortable: false,
+    //   renderCell: (params) => {
+    //     return (
+    //       <Button onClick={() => handleDelete(params.id)}>
+    //         <AiOutlineDelete size={20} />
+    //       </Button>
+    //     );
+    //   },
+    // },
     {
       field: "Pay",
       flex: 0.8,

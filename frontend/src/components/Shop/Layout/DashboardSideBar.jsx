@@ -1,13 +1,9 @@
 import React from "react";
-import { AiOutlineFolderAdd, AiOutlineGift } from "react-icons/ai";
-import { FiPackage, FiShoppingBag } from "react-icons/fi";
-import { MdOutlineLocalOffer } from "react-icons/md";
+import { AiOutlineFolderAdd } from "react-icons/ai";
+import { FiPackage } from "react-icons/fi";
 import { RxDashboard } from "react-icons/rx";
-import { VscNewFile } from "react-icons/vsc";
-import { CiMoneyBill, CiSettings } from "react-icons/ci";
+import { CiSettings } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import { BiMessageSquareDetail } from "react-icons/bi";
-import { HiOutlineReceiptRefund } from "react-icons/hi";
 
 const DashboardSideBar = ({ active }) => {
   return (
@@ -175,6 +171,22 @@ const DashboardSideBar = ({ active }) => {
           </h5>
         </Link>
       </div> */}
+
+      <div className="w-full flex items-center p-4">
+        <Link to="/dashboard-travel-plans" className="w-full flex items-center">
+          <CiSettings
+            size={30}
+            color={`${active === 12 ? "crimson" : "#555"}`}
+          />
+          <h5
+            className={`hidden 800px:block pl-2 text-[18px] font-[400] ${
+              active === 12 ? "text-[crimson]" : "text-[#555]"
+            }`}
+          >
+            Travel Plans
+          </h5>
+        </Link>
+      </div>
 
       <div className="w-full flex items-center p-4">
         <Link to="/settings" className="w-full flex items-center">

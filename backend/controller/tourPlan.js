@@ -38,11 +38,13 @@ router.get("/tour-plan/:travelerId", isSeller, catchAsyncErrors(async (req, res)
 }));
 
 // Get all recent travel plans full list
-router.get("/all", isSeller, catchAsyncErrors(async (req, res) => {
+router.get("/all-tour-plan", catchAsyncErrors(async (req, res) => {
   try {
     const tourPlans = await TourPlan.find().populate("traveler");
 
-    res.status(200).json(tourPlans);
+    res.status(200).json({
+      tourPlan: tourPlans
+    });
   } catch (error) {
     console.error("Error fetching tour plans:", error);
     res.status(500).json({ error: "Failed to fetch tour plans" });

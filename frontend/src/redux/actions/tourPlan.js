@@ -49,20 +49,20 @@ export const getAllTourPlansForUser = () => async (dispatch) => {
 };
 
 // get all products
-export const getAllProducts = () => async (dispatch) => {
+export const getAllTravelPlan = () => async (dispatch) => {
   try {
     dispatch({
-      type: "getAllProductsRequest",
+      type: "getAllTravelPlanRequest",
     });
 
-    const { data } = await axios.get(`${server}/product/get-all-products`);
+    const { data } = await axios.get(`${server}/tour-plan/all-tour-plan`);
     dispatch({
-      type: "getAllProductsSuccess",
-      payload: data.products,
+      type: "getAllTravelPlanSuccess",
+      payload: data.tourPlan,
     });
   } catch (error) {
     dispatch({
-      type: "getAllProductsFailed",
+      type: "getAllTravelPlanFailed",
       payload: error.response.data.message,
     });
   }

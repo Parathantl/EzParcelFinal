@@ -12,18 +12,21 @@ router.post(
     try {
       const { groupTitle, userId, sellerId } = req.body;
 
-      const isConversationExist = await Conversation.findOne({ groupTitle });
+      // Check if a conversation already exists between the same user and seller
+      const isConversationExist = await Conversation.findOne({
+        members: { $all: [userId, sellerId] }, // Check if both userId and sellerId are in the members array
+      });
 
       if (isConversationExist) {
-        const conversation = isConversationExist;
-        res.status(201).json({
+        res.status(200).json({
           success: true,
-          conversation,
+          conversation: isConversationExist,
         });
       } else {
+        // Create a new conversation if none exists
         const conversation = await Conversation.create({
           members: [userId, sellerId],
-          groupTitle: groupTitle,
+          groupTitle: groupTitle || `${userId}-${sellerId}`, // Optionally set a default title
         });
 
         res.status(201).json({
@@ -32,10 +35,11 @@ router.post(
         });
       }
     } catch (error) {
-      return next(new ErrorHandler(error.response.message), 500);
+      return next(new ErrorHandler(error.message || "Internal Server Error", 500));
     }
   })
 );
+
 
 // get seller conversations
 router.get(

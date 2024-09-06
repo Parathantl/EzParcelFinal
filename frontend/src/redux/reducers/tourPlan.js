@@ -13,7 +13,6 @@ export const tourPlanReducer = createReducer(initialState, {
   },
   tourPlanCreateSuccess: (state, action) => {
     state.isLoading = false;
-    state.tourPlans = action.payload;
     state.success = true;
   },
   tourPlanCreateFail: (state, action) => {
@@ -22,7 +21,7 @@ export const tourPlanReducer = createReducer(initialState, {
     state.success = false;
   },
 
-  // get all products
+  // get all tour plan for users
   getAllTourPlansForUserRequest: (state) => {
     state.isLoading = true;
   },
@@ -34,6 +33,19 @@ export const tourPlanReducer = createReducer(initialState, {
     state.isLoading = false;
     state.error = action.payload;
   },
+
+    // get all tour plan for seller
+    getAllTravelPlanRequest: (state) => {
+      state.isLoading = true;
+    },
+    getAllTravelPlanSuccess: (state, action) => {
+      state.isLoading = false;
+      state.tourPlans = action.payload;
+    },
+    getAllTravelPlanFailed: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   
   clearErrors: (state) => {
     state.error = null;

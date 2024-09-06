@@ -1,20 +1,48 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from "react";
-import { getAllTourPlansForUser } from '../../redux/actions/tourPlan';
+import { getAllTourPlansForUser, getAllTravelPlan } from '../../redux/actions/tourPlan';
+import axios from 'axios';
+import { server } from '../../server';
+import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
-const TourPlanList = () => {
+const TourPlanList = ({ userType }) => {
   const { tourPlans, loading } = useSelector((state) => state.tourPlan);
   const { isSeller } = useSelector((state) => state.seller);
+  const { seller } = useSelector((state) => state.seller);
 
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(getAllTourPlansForUser());
-  }, [dispatch]);
+  const navigate = useNavigate();
 
-  const handleSendMessage = (planId) => {
-    // Placeholder for sending a message logic
-    alert(`Message sent to traveler for tour plan: ${planId}`);
+  useEffect(() => {
+    if (userType === "seller") {
+      dispatch(getAllTravelPlan());
+    }else {
+      dispatch(getAllTourPlansForUser());
+    }
+  }, [dispatch, userType]);
+
+  const handleSendMessage = async (plan) => {
+      if (isSeller) {
+        const groupTitle = plan._id + seller._id;
+        const userId = plan.traveler._id;
+        const sellerId = seller._id;
+        console.log(groupTitle, userId, sellerId);
+        await axios
+          .post(`${server}/conversation/create-new-conversation`, {
+            groupTitle,
+            userId,
+            sellerId,
+          })
+          .then((res) => {
+            navigate(`/dashboard-messages`);
+          })
+          .catch((error) => {
+            toast.error(error.response.data.message);
+          });
+      } else {
+        toast.error("Please login to create a conversation");
+      }
   };
 
   if (loading) {
@@ -34,6 +62,12 @@ const TourPlanList = () => {
               className="p-4 bg-gray-100 rounded-md shadow-md space-y-2"
             >
               <p className="text-lg font-semibold">
+                Traveler Name: <span className="font-normal">{plan.traveler.name}</span>
+              </p>
+              <p className="text-lg font-semibold">
+                Email: <span className="font-normal">{plan.traveler.email}</span>
+              </p>
+              <p className="text-lg font-semibold">
                 Country: <span className="font-normal">{plan.country}</span>
               </p>
               <p>
@@ -47,7 +81,7 @@ const TourPlanList = () => {
                 </span>
               </p>
              { isSeller && <button
-                onClick={() => handleSendMessage(plan._id)}
+                onClick={() => handleSendMessage(plan)}
                 className="mt-2 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300"
               >
                 Send Message

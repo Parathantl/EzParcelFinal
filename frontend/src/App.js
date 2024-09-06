@@ -57,6 +57,7 @@ import { getAllProducts } from "./redux/actions/product";
 import { getAllEvents } from "./redux/actions/event";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import ShopTravelPlans from "./pages/Shop/ShopTravelPlans.jsx";
 
 const App = () => {
 
@@ -108,9 +109,7 @@ const App = () => {
         <Route
           path="/inbox"
           element={
-            <ProtectedRoute>
               <UserInbox />
-            </ProtectedRoute>
           }
         />
         <Route
@@ -195,6 +194,14 @@ const App = () => {
           element={
             <SellerProtectedRoute>
               <ShopAllProducts />
+            </SellerProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard-travel-plans"
+          element={
+            <SellerProtectedRoute>
+              <ShopTravelPlans />
             </SellerProtectedRoute>
           }
         />

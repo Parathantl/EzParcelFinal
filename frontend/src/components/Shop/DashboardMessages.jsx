@@ -1,7 +1,7 @@
 import axios from "axios";
 import { server } from "../../server";
 import React, { useRef, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowRight, AiOutlineSend } from "react-icons/ai";
 import styles from "../../styles/styles";
@@ -319,11 +319,11 @@ const MessageList = ({
       <div className="pl-3">
         <h1 className="text-[18px]">{user?.name}</h1>
         <p className="text-[16px] text-[#000c]">
-          {!isLoading && data?.lastMessageId !== user?._id
-            ? "You:"
-            : user?.name.split(" ")[0] + ": "}{" "}
-          {data?.lastMessage}
-        </p>
+  {!isLoading && data?.lastMessageId !== user?._id
+    ? "You:"
+    : (user?.name?.split(" ")[0] || user?.name) + ": "}{" "}
+  {data?.lastMessage}
+</p>
       </div>
     </div>
   );
