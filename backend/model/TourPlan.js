@@ -6,15 +6,15 @@ const TourPlanSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  country: {
+  fromCountry: {
     type: String,
     required: true,
   },
-  startDate: {
-    type: Date,
+  toCountry: {
+    type: String,
     required: true,
   },
-  endDate: {
+  date: {
     type: Date,
     required: true,
   },

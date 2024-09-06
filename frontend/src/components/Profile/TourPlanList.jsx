@@ -61,24 +61,26 @@ const TourPlanList = ({ userType }) => {
               key={plan._id}
               className="p-4 bg-gray-100 rounded-md shadow-md space-y-2"
             >
-              <p className="text-lg font-semibold">
+              {isSeller && (<>
+                <p className="text-lg font-semibold">
                 Traveler Name: <span className="font-normal">{plan.traveler.name}</span>
               </p>
               <p className="text-lg font-semibold">
                 Email: <span className="font-normal">{plan.traveler.email}</span>
               </p>
+              </>) }
               <p className="text-lg font-semibold">
-                Country: <span className="font-normal">{plan.country}</span>
+                From Country: <span className="font-normal">{plan.fromCountry}</span>
+              </p>
+              <p className="text-lg font-semibold">
+                To Country: <span className="font-normal">{plan.toCountry}</span>
               </p>
               <p>
-                From:{" "}
+                Date:{" "}
                 <span className="font-semibold">
-                  {new Date(plan.startDate).toLocaleDateString()}
+                  {new Date(plan.date).toLocaleDateString()}
                 </span>{" "}
-                To:{" "}
-                <span className="font-semibold">
-                  {new Date(plan.endDate).toLocaleDateString()}
-                </span>
+                
               </p>
              { isSeller && <button
                 onClick={() => handleSendMessage(plan)}

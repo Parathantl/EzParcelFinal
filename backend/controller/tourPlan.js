@@ -7,13 +7,13 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 // Create a new tour plan
 router.post("/", isAuthenticated, catchAsyncErrors (async (req, res) => {
   try {
-    const { traveler, country, startDate, endDate } = req.body;
+    const { traveler, fromCountry, toCountry, date, } = req.body;
 
     const newTourPlan = new TourPlan({
       traveler,
-      country,
-      startDate,
-      endDate,
+      fromCountry,
+      toCountry,
+      date,
     });
 
     const savedPlan = await newTourPlan.save();

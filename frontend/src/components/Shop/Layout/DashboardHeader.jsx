@@ -1,5 +1,5 @@
 import React from "react";
-import { FiPackage } from "react-icons/fi";
+import { FiPackage, FiHome } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BiMessageSquareDetail } from "react-icons/bi";
@@ -41,7 +41,10 @@ const DashboardHeader = () => {
               className="mx-5 cursor-pointer"
             />
           </Link> */}
-          <Link to="/dashboard-orders" className="800px:block hidden">
+          <Link to="/" className="800px:block hidden">
+            <FiHome color="#555" size={30} className="mx-5 cursor-pointer" />
+          </Link>
+                    <Link to="/dashboard-orders" className="800px:block hidden">
             <FiPackage color="#555" size={30} className="mx-5 cursor-pointer" />
           </Link>
           <Link to="/dashboard-messages" className="800px:block hidden">

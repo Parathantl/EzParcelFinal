@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 const TourPlanForm = ({ travelerId }) => {
   const { user } = useSelector((state) => state.user);
   const { success, error } = useSelector((state) => state.tourPlan);
-  const [country, setCountry] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [fromCountry, setFromCountry] = useState("");
+  const [toCountry, setToCountry] = useState("");
+  const [date, setDate] = useState("");
 
   const dispatch = useDispatch();
 
@@ -22,9 +22,9 @@ const TourPlanForm = ({ travelerId }) => {
     }
     if (success) {
       toast.success("Tour Plan created successfully!");
-      setCountry("");
-      setStartDate("");
-      setEndDate("")
+      setFromCountry("");
+      setToCountry("");
+      setDate("")
     }
   }, [dispatch, error, navigate, success]);
 
@@ -34,9 +34,9 @@ const TourPlanForm = ({ travelerId }) => {
     dispatch(
       createTourPlan({
         traveler: user._id,
-        country,
-        startDate,
-        endDate,
+        fromCountry,
+        toCountry,
+        date,
       })
     );
     
@@ -47,14 +47,31 @@ const TourPlanForm = ({ travelerId }) => {
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">Create Tour Plan</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="w-[100%]">
-              <label className="block pb-2">Country</label>
+              <label className="block pb-2">From Country</label>
               <select
                 className="w-[95%] border h-[40px] rounded-[5px]"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
+                value={fromCountry}
+                onChange={(e) => setFromCountry(e.target.value)}
                 required
               >
-                <option value="">Choose your country</option>
+                <option value="">From country</option>
+                {Country.getAllCountries().map((item) => (
+                  <option key={item.isoCode} value={item.isoCode}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="w-[100%]">
+              <label className="block pb-2">To Country</label>
+              <select
+                className="w-[95%] border h-[40px] rounded-[5px]"
+                value={toCountry}
+                onChange={(e) => setToCountry(e.target.value)}
+                required
+              >
+                <option value="">To country</option>
                 {Country.getAllCountries().map((item) => (
                   <option key={item.isoCode} value={item.isoCode}>
                     {item.name}
@@ -64,22 +81,11 @@ const TourPlanForm = ({ travelerId }) => {
             </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Start Date</label>
+          <label className="block text-sm font-medium text-gray-700">Date</label>
           <input
             type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            required
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">End Date</label>
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             required
             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
